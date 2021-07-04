@@ -8,6 +8,7 @@ class TopicCard extends Component {
       <div className='div-card'>
         <div className='div-info'>
           <h4>{data.title}</h4>
+          <p>{data.selftext}</p>
           <p className='p-author'>Author: {data.author}</p>
           <a href={data.url} target="_blank" rel="noreferrer">See More</a>
         </div>

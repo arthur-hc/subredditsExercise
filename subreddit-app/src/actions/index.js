@@ -20,6 +20,7 @@ export const fetchAPI = () => {
       const frontEndResponse = await fetch(`https://www.reddit.com/r/frontend.json`);
       const reactJsJson = await reactJsResponse.json();
       const frontEndJson = await frontEndResponse.json();
+      console.log(frontEndJson)
       dispatch(getPostsAction(reactJsJson.data.children, frontEndJson.data.children))
     } catch (error) {
       console.log(error);
