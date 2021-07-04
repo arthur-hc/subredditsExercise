@@ -14,11 +14,21 @@ class App extends Component {
   };
 
   componentDidMount() {
+    const TWELVE_HOURS = 12;
+    const TEN_MINUTES = 10;
     const currentDate = new Date();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+    if(minutes < TEN_MINUTES) {
+      minutes = `0${minutes}`
+    }
     const seconds = currentDate.getSeconds();
-    const time = `${hours}:${minutes}:${seconds}`
+    let period = 'AM';
+    if(hours > TWELVE_HOURS) {
+      hours = hours - TWELVE_HOURS;
+      period = 'PM'
+    }
+    const time = `${hours}:${minutes}:${seconds} ${period}`
     this.setState({lastUpdate: time})
     const { fetch } = this.props;
     fetch();
@@ -26,14 +36,23 @@ class App extends Component {
 
   render() {
     const { subject, lastUpdate } = this.state;
-    const { isLoading, reactData, frontEndData, fetch } = this.props
-
+    const { isLoading, reactData, frontEndData, fetch } = this.props;
     const currentHour = () => {
+      const TWELVE_HOURS = 12;
+      const TEN_MINUTES = 10;
       const currentDate = new Date();
-      const hours = currentDate.getHours();
-      const minutes = currentDate.getMinutes();
+      let hours = currentDate.getHours();
+      let minutes = currentDate.getMinutes();
+      if(minutes < TEN_MINUTES) {
+        minutes = `0${minutes}`
+      }
       const seconds = currentDate.getSeconds();
-      return `${hours}:${minutes}:${seconds}`
+      let period = 'AM' 
+      if(hours > TWELVE_HOURS) {
+        hours = hours - TWELVE_HOURS;
+        period = 'PM'
+      }
+      return `${hours}:${minutes}:${seconds} ${period}`
     };
 
     const handleChange = ({target}) => {
